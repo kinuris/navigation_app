@@ -6,10 +6,10 @@
     <application
         android:label="Tricymeter"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/launcher_icon">
 
         <meta-data android:name="com.google.android.geo.API_KEY"
-               android:value="AIzaSyDwc4xpLHaIFGR2Ip7ITTyHIX7YduLAyQU"/>
+               android:value="AIzaSyB9F4ZvnfQdsZgG2tXlWp5j8e1hPWooTG4"/>
 
         <activity
             android:name=".MainActivity"

@@ -64,16 +64,21 @@ class MapSampleState extends State<MapSample> {
 
   List<LatLng> _coords = [];
   List<bool> _buttonState = [true, false];
+  String _style = '';
 
   @override
   void initState() {
     super.initState();
 
     () async {
+      final mapStyle = await DefaultAssetBundle.of(context)
+          .loadString('assets/map_styles/dark_mode.json');
+
       final position = await _determinePosition();
       _selfLocation = LatLng(position.latitude, position.longitude);
 
       setState(() {
+        _style = mapStyle;
         _circles.add(Circle(
           circleId: const CircleId('user-area'),
           center: LatLng(position.latitude, position.longitude),
@@ -205,11 +210,11 @@ class MapSampleState extends State<MapSample> {
           : Stack(
               children: [
                 GoogleMap(
-                  mapType: MapType.hybrid,
                   initialCameraPosition: _kGooglePlex!,
-                  onMapCreated: (GoogleMapController controller) {
+                  onMapCreated: (GoogleMapController controller) async {
                     _controller.complete(controller);
                   },
+                  style: _style,
                   circles: _circles,
                   markers: _markers,
                   polylines: _polylines,
